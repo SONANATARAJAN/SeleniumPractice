@@ -30,6 +30,24 @@ public class WebDriverManagerBasePage {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
+    public void setWaitElement(By locator , String element){
+        WebDriverWait wait = new WebDriverWait(driver , Duration.ofSeconds(60));
+        JavascriptExecutor js =(JavascriptExecutor) driver;
+        WebElement ele = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        js.executeScript("arguments[0].scrollIntoView({block : 'center'});",ele);
+
+        try{
+            ele.sendKeys(element);
+        }catch(Exception e){
+            js.executeScript("arguments[0].value=arguments[1];",ele , element);
+        }
+    }
+
+    public String getMessage(By locator){
+        WebDriverWait wait = new WebDriverWait(driver , Duration.ofSeconds(60));
+       return wait.until(ExpectedConditions.presenceOfElementLocated(locator)).getText();
+    }
+
 
 
     public void safeClick(By locator) {
@@ -54,6 +72,8 @@ public class WebDriverManagerBasePage {
             ((JavascriptExecutor) driver)
                     .executeScript("arguments[0].click();", element);
         }
+
+
     }
 
 
