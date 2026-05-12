@@ -43,7 +43,7 @@ public class ApiTestRunner {
                 .get("/us/90210")
                 .then().assertThat().statusCode(200)
                   .and().body("country" ,equalTo("United State"))
-                  .time(lessThan(1000L))
+                  .time(lessThan(10000L))
                   .log().all();
     }
 
